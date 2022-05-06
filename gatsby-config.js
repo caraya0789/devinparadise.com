@@ -3,9 +3,9 @@ module.exports = {
     siteUrl: `https://www.yourdomain.tld`
   },
   plugins: ["gatsby-plugin-sass", {
-    resolve: 'gatsby-plugin-google-analytics',
+    resolve: 'gatsby-plugin-google-gtag',
     options: {
-      "trackingId": "'G-54L009EK0M"
+      "trackingIds": ["G-54L009EK0M"]
     }
   }, "gatsby-plugin-react-helmet"]
 };

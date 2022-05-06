@@ -110,10 +110,6 @@ h2 {
             }
         }
     }
-    @media screen and (orientation:landscape) {
-        position: static;
-        background: $dark-color;
-    }
 }
 
 section {
@@ -133,9 +129,6 @@ section {
     align-items: center;
     background: $traslucent-color;
     color: $light-color;
-    @media screen and (orientation:landscape) {
-        height: calc(100vh - 80px);
-    }
     @media(max-width: 576px) {
         h2 {
             font-size: 1.5rem;
@@ -274,13 +267,15 @@ section {
         background: transparent;
         border:0 none;
         border-bottom: 1px solid $dark-color;
-        margin-bottom: 1rem;
         border-radius: 0px;
         resize: none;
         &:focus {
             background: rgba(255,255,255,0.1);
             outline: 0 none !important;
             box-shadow: 0 0 transparent;
+        }
+        &.is-invalid {
+            border-color: #dc3545;
         }
     }
     .btn-primary {
@@ -291,6 +286,18 @@ section {
             background: $dark-color;
             border-color: $dark-color;
             color: $light-color;
+        }
+        svg {
+            margin-left: 20px;
+        }
+    }
+    .socials {
+        li {
+            margin-right: 20px;
+        }
+        a {
+            color: $dark-color;
+            font-size: 1.5rem;
         }
     }
 }

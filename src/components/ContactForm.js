@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 function ContactForm() {
     const [sent, setSent] = useState( false );
@@ -31,12 +32,20 @@ function ContactForm() {
                 return errors;
             }}
             onSubmit={( values, { setSubmitting, resetForm } ) => {
-                setTimeout( () => {
-                    alert( JSON.stringify( values, null, 2 ) );
-                    setSubmitting( false );
+                axios.post( "https://43lj272xfokeeqp3xkxiecjjfm0lxhka.lambda-url.us-east-2.on.aws/", {
+                    ...values
+                }, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    crossDomain: true
+                } ).then( res => {
                     setSent( true );
                     resetForm();
-                }, 3000 );
+                } ).catch( console.error ).finally( () => {
+                    setSubmitting( false );
+                } )
             }}
         >
             {( {
@@ -104,15 +113,15 @@ function ContactForm() {
                     </div>
                     <button type='submit' className="btn btn-primary">
                         {isSubmitting ? (
-                            <div class="spinner-border text-light" role="status">
-                                <span class="visually-hidden">Loading...</span>
+                            <div className="spinner-border text-light" role="status">
+                                <span className="visually-hidden">Loading...</span>
                             </div>
                         ) : (
                             <>Send <FontAwesomeIcon icon={faArrowRight} /></>
                         )}
                     </button>
                     {sent && (
-                        <div class="alert alert-success mt-4" role="alert">
+                        <div className="alert alert-success mt-4" role="alert">
                             Success... Message Sent!
                         </div>
                     )}
